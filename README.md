@@ -1,3 +1,2 @@
-# wangyan
-my_gitHUB
-啊啊
+# ReactTest
+test React+Flux
