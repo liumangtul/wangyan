@@ -1,2 +1,2 @@
 # ReactTest
-test React+Flux
+将来将在这里放一些相关的简单栗子.
