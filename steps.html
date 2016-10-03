@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap-theme.min.css"/>
+</head>
+<body class="container">
+    <pre class="mark text-info">
+        确保已经全局安装webpack-->npm install -global webpack
+        webpack --help
+
+        mkdir test
+        cd test
+
+        npm init -->初始化package.json
+
+        npm install --save-dev webpack
+
+    </pre>
+
+    <pre class="mark text-info">
+        处理css
+        npm install
+            --save-dev
+                css-loader
+                style-loader
+    </pre>
+
+    <pre class="mark text-info">
+        touch webpack.config.js
+    </pre>
+
+    <pre>
+        loaders 加载的模块 这里用到了css-loader |  style-loader
+        module.exports={
+            entry:'./app/js/entry.js',
+            output:{
+                path:__dirname,
+                filename:'build/bundle.js'
+            },
+            module:{
+                loaders:[
+                    {
+                        test:/\.css$/,
+                        loader:'style!css'
+                    }
+                ]
+            }
+        }
+    </pre>
+
+<pre class="mark text-info">
+        处理ES2015
+
+        npm install
+            --save-dev
+                babel-loader
+                babel-core
+                babel-preset-es2015
+
+        .babelrc-->
+            {
+              "presets": ["es2015"]
+            }
+
+        over
+            webpack
+    </pre>
+
+    <pre>
+        热替换-确保全局已经安装了
+        npm install --save-dev webpack-dev-server
+
+        webpack-dev-server --inline --hot
+
+    </pre>
+
+    <section>
+        <pre class="mark text-danger">
+            npm install
+                --save-dev
+                    babel-core
+                    babel-preset-es2015
+                    babel-preset-react
+                    webpack
+                    webpack-dev-server
+                    babel-loader
+                    react-hot-loader    --热替换
+                    react
+                    react-dom
+
+            webpack.config.js
+            module.exports={
+                entry:'./app/js/entry.js',
+                output:{
+                    path:__dirname,
+                    filename:'build/bundle.js'
+                },
+                module:{
+                    loaders:[
+                        {
+                            test:/\.css$/,
+                            loader:'style!css'
+                        },
+                        {
+                            test:/\.js$/,
+                            exclude:/node_modules/,
+                            loader:'react-hot!babel'
+                        }
+                    ]
+                }
+            }
+
+            .babelrc
+            {
+              "presets": ["es2015","react"]
+            }
+        </pre>
+        <pre>
+
+            补充
+            首先安装几个依赖包:
+            # ES2015转码规则
+            $ npm install --save-dev babel-preset-es2015
+            # react转码规则$ npm install --save-dev babel-preset-react
+            # ES7不同阶段语法提案的转码规则（共有4个阶段），选装一个
+            $ npm install --save-dev babel-preset-stage-0
+            $ npm install --save-dev babel-preset-stage-1
+            $ npm install --save-dev babel-preset-stage-2
+            $ npm install --save-dev babel-preset-stage-3
+
+            修改webpack.config.js
+            loaders: [
+           ...
+            {
+                test: /\.jsx?$/,
+                exclude: /node_modules/,
+                loader: "babel",
+                query:
+                {
+                    presets:['react','es2015','stage-2']
+                }
+            },
+            ...
+        </pre>
+    </section>
+</body>
+</html>
